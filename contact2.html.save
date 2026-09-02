@@ -1,0 +1,68 @@
+!DOCTYPE html>
+<html>
+
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact</title>
+
+    <style>
+        /* Paste ALL library CSS here */
+
+
+</style>
+
+/head>
+
+<body>
+
+    <!-- Paste ALL library HTML here -->
+<form
+  action="https://formspree.io/f/xzebpqno"
+  class="fs-form"
+  target="_top"
+  method="POST"
+>
+  <div class="fs-field">
+    <label class="fs-label" for="name">Your Name</label>
+    <input class="fs-input" id="name" name="name" required />
+  </div>
+  <div class="fs-field">
+    <label class="fs-label" for="email">Email</label>
+    <input class="fs-input" id="email" name="email" required />
+    <p class="fs-description">
+      This will help me respond to your query via an email.
+    </p>
+  </div>
+
+
+  <div class="fs-field">
+    <label class="fs-label" for="message">Message</label>
+    <textarea
+      class="fs-textarea"
+      id="message"
+      name="message"
+required
+    ></textarea>
+    <p class="fs-description">What would you like to discuss?</p>
+  </div>
+<div class="fs-field">
+<label for="options">Reason for Contact:</label>
+<select id="options" name="options">
+        <option value="General Inquiry">General Inquiry</option>
+        <option value="Website Suggestion/Feedback<">Website Suggestion/Feedback</option>
+        <option value="Report a Bug">Report a Bug</option>
+
+</select>
+</div>
+
+
+  <div class="fs-button-group">
+    <button class="fs-button" type="submit">Submit</button>
+  </div>
+</form>
+
+
+</body>
+
+</html>
+
