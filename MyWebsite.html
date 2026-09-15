@@ -189,17 +189,96 @@ body{
 
 /* GALLERY */
 
-.gallery{
-    display:grid;
-    grid-template-columns:repeat(4,1fr);
-    gap:20px;
+.project-gallery {
+  background: rgba(18, 16, 38, 0.6);
+  border: 1px solid rgba(138, 43, 226, 0.2);
+  border-radius: 12px;
+  padding: 20px;
+  backdrop-filter: blur(10px);
 }
 
-.gallery img{
-    width:100%;
-    border-radius:12px;
+.project-gallery h2 {
+  color: #c084fc;
+  font-size: 1.4rem;
+  margin-bottom: 15px;
 }
 
+.viewer {
+  position: relative;
+  width: 100%;
+  max-width: 850px;
+  height: 420px;
+  margin: 0 auto;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #0d0b1a;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.viewer img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+#caption {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 10px 15px;
+  background: rgba(10, 8, 20, 0.8);
+  color: #e2e8f0;
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+.arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(30, 27, 60, 0.75);
+  color: #c084fc;
+  border: 1px solid rgba(192, 132, 252, 0.3);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  cursor: pointer;
+  z-index: 2;
+}
+
+.arrow:hover {
+  background: #a855f7;
+  color: #fff;
+}
+
+.prev { left: 12px; }
+.next { right: 12px; }
+
+.thumbnails {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 12px;
+  margin-top: 15px;
+}
+
+.thumb {
+  width: 100%;
+  height: 90px;
+  object-fit: cover;
+  border-radius: 6px;
+  border: 2px solid transparent;
+  opacity: 0.5;
+  cursor: pointer;
+  transition: opacity 0.2s, border-color 0.2s;
+}
+
+.thumb:hover,
+.thumb.active {
+  opacity: 1;
+  border-color: #a855f7;
+}
 /* BUTTONS */
 
 .buttons,
@@ -434,34 +513,23 @@ For this project i have turned a laptop that was leiing around into a server and
 
     </section>
 
-    <!-- GALLERY -->
-    <section class="glass-card">
+<section class="project-gallery">
+  <h2>Project Gallery</h2>
 
-        <h3>Project Gallery</h3>
+  <div class="viewer">
+    <button class="arrow prev" onclick="changeSlide(-1)" aria-label="Previous">&#10094;</button>
+    <img id="main-display" src="image1.png" alt="Project Preview">
+    <button class="arrow next" onclick="changeSlide(1)" aria-label="Next">&#10095;</button>
+    <p id="caption">About Me Section</p>
+  </div>
 
-        <div class="gallery">
-		
-	 <a href="images/WP1.png" target="_blank">
-	 <img src="images/WP1.png">
-	</a>
-		<a href="images/WP2.png" target="_blank">
-            <img src="images/WP2.png">
-	</a>
-
-
-	  <a href="images/WP3.png" target="_blank">
-	<img src="images/WP3.png">
-	</a>
-            
-	  <a href="images/WP4.png" target="_blank">
-	<img src="images/WP4.png">
-	</a>
-
-<p>Click the pictures in the gallery to view in full screen</p>
-        </div>
-
-    </section>
-
+  <div class="thumbnails">
+    <img src="image1.png" alt="About Me" class="thumb active" onclick="setSlide(0)">
+    <img src="image2.png" alt="Education" class="thumb" onclick="setSlide(1)">
+    <img src="image3.png" alt="Projects" class="thumb" onclick="setSlide(2)">
+    <img src="image4.png" alt="Contact Form" class="thumb" onclick="setSlide(3)">
+  </div>
+</section>
     <!-- BOTTOM BUTTONS -->
     <div class="bottom-buttons">
 
@@ -476,6 +544,38 @@ For this project i have turned a laptop that was leiing around into a server and
     </div>
 
 </div>
+<script>
+const slides = [
+  { src: 'image1.png', caption: 'About Me Section' },
+  { src: 'image2.png', caption: 'Education Overview' },
+  { src: 'image3.png', caption: 'Projects Section' },
+  { src: 'image4.png', caption: 'Contact Form' }
+];
 
+let index = 0;
+
+const mainImg = document.getElementById('main-display');
+const captionText = document.getElementById('caption');
+const thumbs = document.querySelectorAll('.thumb');
+
+function render() {
+  mainImg.src = slides[index].src;
+  captionText.textContent = slides[index].caption;
+  
+  thumbs.forEach((t, i) => {
+    t.classList.toggle('active', i === index);
+  });
+}
+
+function changeSlide(direction) {
+  index = (index + direction + slides.length) % slides.length;
+  render();
+}
+
+function setSlide(i) {
+  index = i;
+  render();
+}
+</script>
 </body>
 </html>
